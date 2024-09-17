@@ -6,17 +6,29 @@
     <title>Практическая 1</title>
     <script>
         function factorial(n) {
-            return n ? n * factorial(n - 1) : 1;
+            var z = 1;
+            if (n === 0) {
+                return 1;
+            }
+            for (var y = 1; y <= n; y++) {
+                z = z * y;
+            }
+            return z;
         }
         function Piii() {
-            var N = Number(document.forms["frm"].elements["N"].value)
-            var X = Number(document.forms["frm"].elements["X"].value)
-            var S = 0
+            var N = Number(document.forms["frm"].elements["N"].value);
+            var X = Number(document.forms["frm"].elements["X"].value);
+            var S = 0;
+            if (Math.abs(X)<N){
             for (var i = 0; i <= N; i++) {
-                S += Math.pow(-1, i) * Math.pow(X, i) / factorial(i)
+                S += (Math.pow(-1, i) * Math.pow(X, i)) / factorial(i);
             }
-            document.getElementById("result").innerHTML = "Результат: " + S
-        }
+            document.getElementById("result").innerHTML = "Результат: " + S;
+            }
+            else {
+                document.getElementById("result").innerHTML ="Ограничитель не может быть меньше x";
+            }
+    }
     </script>
 </head>
 <body>
