@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практическая 1</title>
+    <script>
+        function factorial(n) {
+            return n ? n * factorial(n - 1) : 1;
+        }
+        function Piii() {
+            var N = Number(document.forms["frm"].elements["N"].value)
+            var X = Number(document.forms["frm"].elements["X"].value)
+            var S = 0
+            for (var i = 0; i <= N; i++) {
+                S += Math.pow(-1, i) * Math.pow(X, i) / factorial(i)
+            }
+            document.getElementById("result").innerHTML = "Результат: " + S
+        }
+    </script>
+</head>
+<body>
+    <h1>Практическая 1</h1>
+    <p>Антонов, 2 вариант</p>
+    <form id="frm" onsubmit="event.preventDefault(); Piii();">
+        Введите число N: <input id="N" type="number"><br><br>
+        Введите число X: <input id="X" type="number"><br><br>
+        <input type="submit" value="Отправить">
+    </form><br>
+    <div id="result"></div>
+</body>
+</html>
