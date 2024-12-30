@@ -1,44 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Практическая 1</title>
-    <script>
-        function factorial(n) {
-            var z = 1;
-            if (n === 0) {
-                return 1;
-            }
-            for (var y = 1; y <= n; y++) {
-                z = z * y;
-            }
-            return z;
+    <title>Возвращение тусы на Новый год</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: url('ааа.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #fff;
+            text-align: center;
         }
-        function Piii() {
-            var N = Number(document.forms["frm"].elements["N"].value);
-            var X = Number(document.forms["frm"].elements["X"].value);
-            var S = 0;
-            if (Math.abs(X)<N){
-            for (var i = 0; i <= N; i++) {
-                S += (Math.pow(-1, i) * Math.pow(X, i)) / factorial(i);
-            }
-            document.getElementById("result").innerHTML = "Результат: " + S;
-            }
-            else {
-                document.getElementById("result").innerHTML ="Ограничитель не может быть меньше x";
-            }
-    }
-    </script>
+
+        h1 {
+            text-align: center;
+            color: #d6e5f5;
+            margin-top: 20px;
+        }
+
+        .foot {
+            max-width: 800px;
+            margin: 20px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            line-height: 1.6;
+            font-size: 16px;
+            color: #555;
+            text-align: justify;
+        }
+        .question {
+            margin: 20px 0;
+            font-size: 1.5em;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            font-size: 1.5em;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Практическая 1</h1>
-    <p>Антонов, 2 вариант</p>
-    <form id="frm" onsubmit="event.preventDefault(); Piii();">
-        Введите число N: <input id="N" type="number"><br><br>
-        Введите число X: <input id="X" type="number"><br><br>
-        <input type="submit" value="Отправить">
-    </form><br>
-    <div id="result"></div>
+    <h1>Возвращение тусы на Новый год</h1>
+    <p class="foot">Понимаю что сегодня происходит какаято хуйня(на ошибки забейте хуй, делаю сайт в торопя), но это не
+        повод
+        проебывать встречу нового года с друзьями) Возникло дохуя разногласий, хз зачем я делаю этот сайь делаю, но
+        похуй, так вот,
+        давайте как в старые добрые соберемся, и отлично проведем времч, и не только новый год но и оставшиеся выходные
+        дни
+        (Я могу не выходить гулять, так как занят ну или лееенъ хехехе) вообщем давайте ребята, ну и по приколу добавлю
+        тест примерныц, </p>
+
+        <h1>Итааак тест:</h1>
+        <p>Нажми на зеленые кнопки</p>
+        <div id="questions">
+            <p class="question">1. Куда идём отмечать? Да выбирай уже, а то заебало все!</p>
+            <button onclick="vote('home', 'first')">Кирик: Остаёмся дома, и идите нахуй!</button>
+            <button onclick="vote('restaurant', 'first')">Ден: ко мне на хату уже решили!</button>
+            <button onclick="vote('nature', 'first')">Тоха: На хату к дену, и в банькууу</button>
+    
+            <p class="question">2. Что будем пить? Решай нормально!</p>
+            <button onclick="vote('vodka', 'second')">Водку, как всегда!</button>
+            <button onclick="vote('champagne', 'second')">Шампанское, это же Новый Год!</button>
+            <button onclick="vote('juice', 'second')">Лимонад, хватит уже!</button>
+        </div>
+    
+        <button onclick="showResult()" style="margin-top: 20px; background-color: #2196f3;">Узнать, кто ты!</button>
+    
+        <div class="result" id="result" style="color: #fff; font-size: 60px;"></div>
+    
+        <script>
+            const scores = {
+                home: 0,
+                restaurant: 0,
+                nature: 0,
+                vodka: 0,
+                champagne: 0,
+                juice: 0
+            };
+    
+            function vote(option, question) {
+                if (question === 'first') {
+                    // Reset second question answers if the first question is answered
+                    document.querySelectorAll('.second-question').forEach(button => {
+                        button.disabled = false;
+                    });
+                }
+    
+                scores[option]++;
+                // Disable buttons for the question already answered
+                if (question === 'first') {
+                    document.querySelectorAll('.first-question').forEach(button => {
+                        button.disabled = true;
+                    });
+                } else if (question === 'second') {
+                    document.querySelectorAll('.second-question').forEach(button => {
+                        button.disabled = true;
+                    });
+                }
+            }
+    
+            function showResult() {
+                let resultText = '';
+                if (scores.home > scores.restaurant && scores.home > scores.nature) {
+                    resultText = 'Пидор, дома сидеть нельзя, ведб НГ нужно отметить, решай лучше!';
+                } else if (scores.restaurant > scores.home && scores.restaurant > scores.nature) {
+                    resultText = 'Красавчик, гуууд збсссс!';
+                } else if (scores.nature > scores.home && scores.nature > scores.restaurant) {
+                    resultText = 'Все ахуенно, но бляяять, какая баня.....';
+                } else {
+                    resultText = 'Сука пизда рулю.ПЕРЕЗАГРУЗИ СТРАНИЦУ!!!!!!!!';
+                }
+    
+                if (scores.vodka > scores.champagne && scores.vodka > scores.juice) {
+                    resultText += ' И да, водка рулит!';
+                } else if (scores.champagne > scores.vodka && scores.champagne > scores.juice) {
+                    resultText += ' О, шампанское! Ну что ж, Новый Год, так Новый Год!';
+                } else if (scores.juice > scores.vodka && scores.juice > scores.champagne) {
+                    resultText += ' Лимонад? Серьезно?';
+                }
+    
+                document.getElementById('result').textContent = resultText;
+            }
+        </script>
+
+<button class="final-result" id="finalResult" onclick="showText()">Итог</button>
+<script>
+    function showText() {
+        document.getElementById("finalResult").innerText = "Давайте ахуенно встретим новый годдд!<br> (я заебался писать этот сайт для телефона)";
+    }
+</script>
+
 </body>
 </html>
